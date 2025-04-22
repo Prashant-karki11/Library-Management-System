@@ -1,85 +1,46 @@
 package model;
 
-import java.util.Date;
-
 public class User {
-    // Instance variables
-    private int userID;
-    private String name;
-    private String email;
-    private String phone;
-    private String address;
-    private Date membershipDate;
-    private String role;
+    private String name, email, password, role;
 
-    // Constructors
-    public User() {
-    }
-
-    public User(int userID, String name, String email, String phone, String address, Date membershipDate, String role) {
-        this.userID = userID;
+    public User(String name, String email, String password, String role) {
         this.name = name;
         this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.membershipDate = membershipDate;
+        this.password = password;
         this.role = role;
     }
 
-    // Getters and setters
-    public int getUserID() {
-        return userID;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public String getRole() {
+		return role;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Date getMembershipDate() {
-        return membershipDate;
-    }
-
-    public void setMembershipDate(Date membershipDate) {
-        this.membershipDate = membershipDate;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public void setRole(String role) {
+		this.role = role;
+	}
+    
+   
 }
