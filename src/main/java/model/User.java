@@ -1,13 +1,73 @@
 package model;
 
+import java.util.Date;
+
 public class User {
-    private String name, email, password, role;
+    // Instance variables
+    private int userID;
+    private String name;
+    private String email;
+    private String phone;
+    private String address;
+    private Date membershipDate;
+    private String role;
+    private String password;
+
+    // Constructors
+    public User() {
+    }
+
+    public User(int userID, String name, String email, String phone, String address, Date membershipDate, String role, String password) {
+        this.userID = userID;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.membershipDate = membershipDate;
+        this.role = role;
+        this.password = password;
+    }
+
+    public User(int userID, String name, String email, String phone, String address, Date membershipDate, String role) {
+        this.userID = userID;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.membershipDate = membershipDate;
+        this.role = role;
+        this.password = null;
+    }
 
     public User(String name, String email, String password, String role) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    public User(int userID, String name, String email, String password, String role) {
+        this.userID = userID;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(int userID, String name, String email, String role) {
+        this.userID = userID;
+        this.name = name;
+        this.email = email;
+        this.role = role;
+    }
+
+    // Getters and setters
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getName() {
@@ -26,12 +86,28 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Date getMembershipDate() {
+        return membershipDate;
+    }
+
+    public void setMembershipDate(Date membershipDate) {
+        this.membershipDate = membershipDate;
     }
 
     public String getRole() {
@@ -41,4 +117,12 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
-} 
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}

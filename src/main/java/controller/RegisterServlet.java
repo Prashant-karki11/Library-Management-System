@@ -23,9 +23,9 @@ public class RegisterServlet extends HttpServlet {
             UserDAO dao = new UserDAO(con);
 
             if (dao.registerUser(user)) {
-                res.sendRedirect("View/login.jsp?success=Registered Successfully");
+                res.sendRedirect("View/jsp/login.jsp?success=Registered Successfully");
             } else {
-                res.sendRedirect("View/register.jsp?error=Error Occurred");
+                res.sendRedirect("View/jsp/register.jsp?error=Error Occurred");
             }
         } catch (Exception e) {
             e.printStackTrace();

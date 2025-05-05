@@ -33,12 +33,12 @@ public class LoginServlet extends HttpServlet {
                 res.addCookie(roleCookie);
 
                 if (user.getRole().equals("admin")) {
-                    res.sendRedirect("View/adminDashboard.jsp");
+                    res.sendRedirect("home");
                 } else {
-                    res.sendRedirect("View/userDashboard.jsp");
+                    res.sendRedirect("home");
                 }
             } else {
-                res.sendRedirect("View/login.jsp?error=Invalid credentials");
+                res.sendRedirect("View/jsp/login.jsp?error=Invalid credentials");
             }
 
         } catch (Exception e) {

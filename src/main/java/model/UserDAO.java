@@ -33,17 +33,80 @@ public class UserDAO {
             if (rs.next()) {
                 String hashedPassword = rs.getString("password");
                 if (PasswordUtil.checkPassword(plainPassword, hashedPassword)) {
-                    return new User(
+                    User user = new User(
+                        rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("email"),
                         rs.getString("password"),
                         rs.getString("role")
                     );
+                    return user;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public java.util.List<User> getAllUsers() {
+        java.util.List<User> users = new java.util.ArrayList<>();
+        try {
+            String query = "SELECT id, name, email, role FROM users";
+            PreparedStatement pst = con.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                User user = new User(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("email"),
+                    rs.getString("role")
+                );
+                users.add(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    public boolean deleteUserById(int userId) {
+        try {
+            String query = "DELETE FROM users WHERE id = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setInt(1, userId);
+            return pst.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static int getTotalMembers() throws Exception {
+        Connection con = DBConnection.getConnection();
+        String sql = "SELECT COUNT(*) FROM users WHERE role = 'user'";
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+        return 0;
+    }
+
+    public static void addUser(String name, String email, String password, String role) throws Exception {
+        Connection con = DBConnection.getConnection();
+        String hashedPassword = password;
+        try {
+            // If PasswordUtil is available, hash the password
+            Class.forName("model.PasswordUtil");
+            hashedPassword = model.PasswordUtil.hashPassword(password);
+        } catch (Exception ignored) {}
+        String sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setString(1, name);
+        pstmt.setString(2, email);
+        pstmt.setString(3, hashedPassword);
+        pstmt.setString(4, role);
+        pstmt.executeUpdate();
     }
 } 
