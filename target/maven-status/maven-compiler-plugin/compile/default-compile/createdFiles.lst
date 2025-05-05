@@ -1,0 +1,8 @@
+filter\AuthFilter.class
+controller\LoginServlet.class
+model\DBConnection.class
+controller\LogoutServlet.class
+model\PasswordUtil.class
+controller\RegisterServlet.class
+model\User.class
+model\UserDAO.class
