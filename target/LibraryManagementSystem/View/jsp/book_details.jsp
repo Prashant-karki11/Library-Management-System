@@ -14,144 +14,168 @@
             --text-white: #FFFFFF;
             --text-gray: #666666;
             --card-bg: #FFFFFF;
+            --returned-green: #48BB78;
+            --overdue-red: #EF4444;
         }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        body {
+        html, body {
+            height: 100%; /* Ensure full height for sticky footer */
             font-family: 'Roboto', sans-serif;
-            background-color: var(--primary-bg);
-            color: #2D3748;
+            background: linear-gradient(135deg, #232946 0%, #6d83f2 100%);
+            color: #232946;
+            margin: 0;
+            overflow-x: hidden; /* Prevent horizontal overflow */
         }
         .container {
             display: flex;
-            min-height: 100vh;
-        }
-        .sidebar {
-            width: 250px;
-            background: linear-gradient(to bottom, #6B46C1, #A78BFA);
-            height: 100vh;
-            position: fixed;
-            padding: 20px;
-        }
-        .sidebar-header {
-            margin-bottom: 30px;
-        }
-        .logo {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #FFFFFF;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .sidebar ul {
-            list-style: none;
-        }
-        .sidebar a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px;
-            margin: 8px 0;
-            color: #FFFFFF;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .sidebar a:hover, .sidebar a.active {
-            background-color: #A78BFA;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure container takes full viewport height */
+            width: 100vw;
         }
         .content {
-            margin-left: 250px;
-            padding: 30px;
-            width: calc(100% - 250px);
+            flex: 1; /* Grow to push footer to bottom */
+            padding: 40px 0 0 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+        }
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 0;
+            background: none;
+        }
+        .main-card {
+            background: #fff;
+            border-radius: 1.7rem;
+            box-shadow: 0 8px 32px 0 rgba(35, 41, 70, 0.13);
+            padding: 38px;
+            width: 100%;
+            max-width: 100%; /* Ensure it fits within viewport */
+            margin-bottom: 36px;
+            margin-top: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Center the book-details card */
         }
         .book-details {
             background: var(--card-bg);
-            border-radius: 10px;
+            border-radius: 1.3rem;
             padding: 30px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 32px 0 rgba(35, 41, 70, 0.13);
             display: flex;
-            gap: 30px;
+            flex-direction: column; /* Stack book cover and info vertically */
+            align-items: center; /* Center content inside */
+            width: 500px; /* Fixed width for square-like appearance */
+            min-height: 600px; /* Fixed height for square-like appearance */
+            max-width: 90%; /* Responsive for smaller screens */
+            box-sizing: border-box;
         }
         .book-cover {
-            flex: 0 0 300px;
+            width: 200px; /* Smaller width for the image */
+            margin-bottom: 20px; /* Space between image and info */
         }
         .book-cover img {
             width: 100%;
-            height: 400px;
+            height: 300px; /* Adjusted height to fit the square card */
             object-fit: cover;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .book-info {
             flex: 1;
+            max-width: 100%; /* Prevent overflow */
+            text-align: center; /* Center text for better appearance */
         }
         .book-title {
-            font-size: 2em;
-            margin-bottom: 10px;
-            color: #2D3748;
+            font-size: 2em; /* Slightly smaller font to fit the compact card */
+            margin-bottom: 12px;
+            color: #232946;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
         .book-author {
-            font-size: 1.2em;
+            font-size: 1.08em; /* Slightly smaller font */
             color: var(--accent-blue);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            font-weight: 700;
         }
         .book-meta {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
         .meta-item {
             margin-bottom: 10px;
             display: flex;
-            align-items: center;
+            justify-content: center; /* Center meta items */
             gap: 10px;
         }
         .meta-label {
             font-weight: 500;
             color: var(--text-gray);
-            min-width: 120px;
+            min-width: 100px;
         }
         .meta-value {
-            color: #2D3748;
+            color: #232946;
+            font-size: 0.98em; /* Slightly smaller font */
         }
         .book-description {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             line-height: 1.6;
+            color: #444;
+            font-size: 0.98em;
         }
         .action-buttons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
+            justify-content: center; /* Center buttons */
         }
         .btn {
-            padding: 12px 24px;
+            padding: 10px 20px; /* Slightly smaller buttons */
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s;
+            font-weight: 700;
+            font-size: 0.98em; /* Slightly smaller font */
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px #6B46C133;
         }
         .btn-primary {
-            background-color: var(--accent-blue);
-            color: white;
+            background: linear-gradient(90deg, #6d83f2 0%, #232946 100%);
+            color: #fff;
         }
         .btn-primary:hover {
-            background-color: #805AD5;
+            background: linear-gradient(90deg, #232946 0%, #6d83f2 100%);
+            box-shadow: 0 4px 12px #6B46C166;
+        }
+        .btn-primary:disabled {
+            background: #A0AEC0;
+            cursor: not-allowed;
         }
         .btn-secondary {
-            background-color: #E2E8F0;
+            background: #E2E8F0;
             color: #2D3748;
         }
         .btn-secondary:hover {
-            background-color: #CBD5E0;
+            background: #CBD5E0;
+            box-shadow: 0 2px 8px #6B46C133;
         }
         .availability {
             display: inline-block;
-            padding: 8px 16px;
+            padding: 6px 12px; /* Slightly smaller padding */
             border-radius: 20px;
             font-weight: 500;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
+            font-size: 0.98em; /* Slightly smaller font */
         }
         .available {
             background-color: #C6F6D5;
@@ -161,111 +185,323 @@
             background-color: #FED7D7;
             color: #C53030;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.4);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 1.3rem;
+            width: fit-content;
+            max-width: 90vw; /* Prevent overflow on smaller screens */
+            box-shadow: 0 8px 32px 0 rgba(35, 41, 70, 0.13);
+            text-align: center;
+            position: relative;
+        }
+        .modal-content i {
+            font-size: 2em;
+            color: #276749;
+        }
+        .modal-content div {
+            margin-top: 10px;
+            font-size: 1.18em;
+            font-weight: 500;
+            color: #276749;
+        }
+        .modal-content .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #276749;
+        }
+        .error-message {
+            margin-top: 20px;
+            color: #E53E3E;
+            padding: 12px 20px;
+            background-color: #FED7D7;
+            border-radius: 6px;
+            font-size: 0.98em; /* Slightly smaller font */
+            max-width: 400px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .error-message i {
+            margin-right: 8px;
+        }
+        footer {
+            background: #232946;
+            padding: 32px 0 18px 0;
+            text-align: center;
+            width: 100%;
+            border-radius: 0 0 1.5rem 1.5rem;
+            box-shadow: 0 -2px 12px 0 rgba(109, 131, 242, 0.07);
+            color: #fff;
+        }
+        footer p {
+            margin-bottom: 12px;
+            color: #fff;
+            font-size: 1.08em;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 8px;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 1.6em;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: #A78BFA;
+        }
+        .navbar {
+            width: 100vw;
+            background: rgba(36, 32, 77, 0.98);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 48px;
+            height: 70px;
+            box-shadow: 0 2px 16px 0 rgba(35, 41, 70, 0.10);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .navbar-logo {
+            height: 48px;
+            width: auto;
+            border-radius: 10px;
+            background: #fff;
+            padding: 4px 8px;
+            box-shadow: 0 2px 8px #6B46C133;
+        }
+        .navbar-appname {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            margin-left: 32px;
+        }
+        .navbar-links a {
+            color: #e0e7ff;
+            font-size: 1.08em;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 8px 0;
+            border-bottom: 2.5px solid transparent;
+            transition: color 0.2s, border-bottom 0.2s;
+        }
+        .navbar-links a.active, .navbar-links a:hover {
+            color: #fff;
+            border-bottom: 2.5px solid #6B46C1;
+        }
+        .navbar-user {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .navbar-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 8px #6B46C133;
+        }
+        .navbar-userinfo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .navbar-username {
+            font-size: 1.08em;
+            font-weight: 600;
+            color: #fff;
+        }
+        .navbar-useremail {
+            font-size: 0.98em;
+            color: #e0e7ff;
+        }
+        .navbar-authbtns a {
+            margin-left: 12px;
+            padding: 8px 22px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.08em;
+            text-decoration: none;
+            border: none;
+            background: linear-gradient(90deg, #6d83f2 0%, #232946 100%);
+            color: #fff;
+            transition: background 0.2s, color 0.2s;
+            box-shadow: 0 2px 8px #6B46C133;
+        }
+        .navbar-authbtns a:hover {
+            background: linear-gradient(90deg, #232946 0%, #6d83f2 100%);
+            color: #fff;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo"><span>📚</span> Library.io</div>
+<div class="navbar">
+    <div class="navbar-left">
+        <img src="${pageContext.request.contextPath}/assets/logo.jpg" alt="Library Logo" class="navbar-logo" />
+        <span class="navbar-appname">Library.io</span>
+        <nav class="navbar-links">
+            <a href="${pageContext.request.contextPath}/home">Home</a>
+            <c:if test="${sessionScope.user != null && sessionScope.user.role == 'admin'}">
+                <a href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
+                <a href="${pageContext.request.contextPath}/library_loans">Library Loans</a>
+            </c:if>
+            <a href="${pageContext.request.contextPath}/recent_activities">My Profile</a>
+            <c:if test="${sessionScope.user != null && sessionScope.user.role == 'admin'}">
+                <a href="${pageContext.request.contextPath}/books">Books</a>
+                <a href="${pageContext.request.contextPath}/members">Members</a>
+            </c:if>
+            <a href="${pageContext.request.contextPath}/about">About Us</a>
+        </nav>
+    </div>
+    <div class="navbar-user">
+        <c:choose>
+            <c:when test="${sessionScope.user != null && not empty sessionScope.user.imageData}">
+                <img src="${pageContext.request.contextPath}/user-image/${sessionScope.user.userID}" alt="Profile" class="navbar-avatar" />
+            </c:when>
+            <c:otherwise>
+                <img src="${pageContext.request.contextPath}/assets/default-avatar.jpg" alt="Default" class="navbar-avatar" />
+            </c:otherwise>
+        </c:choose>
+        <c:if test="${sessionScope.user != null}">
+            <div class="navbar-userinfo">
+                <span class="navbar-username">${sessionScope.user.name}</span>
+                <span class="navbar-useremail">${sessionScope.user.email}</span>
             </div>
-            <ul>
-                <li><a href="${pageContext.request.contextPath}/home"><i class="fas fa-home"></i> Home</a></li>
-                <c:if test="${sessionScope.user != null && sessionScope.user.role == 'admin'}">
-                    <li><a href="${pageContext.request.contextPath}/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                    <li><a href="${pageContext.request.contextPath}/library_loans"><i class="fas fa-book-open"></i> Library Loans</a></li>
-                </c:if>
-                <li><a href="${pageContext.request.contextPath}/recent_activities"><i class="fas fa-clock"></i> My Profile</a></li>
-                <li><a href="${pageContext.request.contextPath}/books"><i class="fas fa-book"></i> Books</a></li>
-                <li><a href="${pageContext.request.contextPath}/members"><i class="fas fa-users"></i> Members</a></li>
-                <li><a href="${pageContext.request.contextPath}/about"><i class="fas fa-info-circle"></i> About Us</a></li>
-            </ul>
-        </aside>
+        </c:if>
+        <c:if test="${sessionScope.user == null}">
+            <div class="navbar-authbtns">
+                <a href="${pageContext.request.contextPath}/View/jsp/login.jsp">Sign In</a>
+                <a href="${pageContext.request.contextPath}/View/jsp/register.jsp" style="background:#EF4444;">Register</a>
+            </div>
+        </c:if>
+    </div>
+</div>
 
-        <main class="content">
-            <div class="book-details">
-                <div class="book-cover">
-                    <img src="${book.image}" alt="${book.title}">
-                </div>
-                <div class="book-info">
-                    <h1 class="book-title">${book.title}</h1>
-                    <div class="book-author">by ${book.author}</div>
-                    
-                    <!-- Success Modal -->
-                    <c:if test="${not empty sessionScope.successMessage}">
-                        <div id="successModal" class="modal" style="display:block; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.2);">
-                            <div class="modal-content" style="background:#f6ffed; color:#276749; margin:10% auto; padding:30px 40px; border-radius:10px; width:fit-content; box-shadow:0 4px 24px rgba(0,0,0,0.15); text-align:center; position:relative;">
-                                <span onclick="document.getElementById('successModal').style.display='none'" style="position:absolute; top:10px; right:20px; font-size:1.5em; cursor:pointer; color:#276749;">&times;</span>
-                                <i class="fas fa-check-circle" style="font-size:2em;"></i>
-                                <div style="margin-top:10px; font-size:1.2em; font-weight:500;">${sessionScope.successMessage}</div>
+<div class="container">
+    <main class="content">
+        <div class="main-content">
+            <div class="main-card">
+                <div class="book-details">
+                    <div class="book-cover">
+                        <c:if test="${not empty book.imageData}">
+                            <img src="${pageContext.request.contextPath}/book-image/${book.id}" alt="${book.title}">
+                        </c:if>
+                    </div>
+                    <div class="book-info">
+                        <h1 class="book-title">${book.title}</h1>
+                        <div class="book-author">by ${book.author}</div>
+
+                        <!-- Success Modal -->
+                        <c:if test="${not empty sessionScope.successMessage}">
+                            <div id="successModal" class="modal" style="display:block;">
+                                <div class="modal-content">
+                                    <span onclick="document.getElementById('successModal').style.display='none'" class="close">×</span>
+                                    <i class="fas fa-check-circle"></i>
+                                    <div>${sessionScope.successMessage}</div>
+                                </div>
+                            </div>
+                            <% session.removeAttribute("successMessage"); %>
+                        </c:if>
+
+                        <div class="availability ${bookAvailable ? 'available' : 'unavailable'}">
+                            <i class="fas ${bookAvailable ? 'fa-check-circle' : 'fa-times-circle'}"></i>
+                            ${bookAvailable ? 'Available for Borrowing' : 'Currently Unavailable'}
+                        </div>
+
+                        <div class="book-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Publisher:</span>
+                                <span class="meta-value">${book.publisher}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">ISBN:</span>
+                                <span class="meta-value">${book.isbn}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Publication Year:</span>
+                                <span class="meta-value">${book.publicationYear}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Genre:</span>
+                                <span class="meta-value">${book.genre}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Pages:</span>
+                                <span class="meta-value">${book.pages}</span>
                             </div>
                         </div>
-                        <% session.removeAttribute("successMessage"); %>
-                        <script>
-                            setTimeout(function(){
-                                var modal = document.getElementById('successModal');
-                                if(modal) modal.style.display = 'none';
-                            }, 3500);
-                        </script>
-                    </c:if>
 
-                    <div class="availability ${bookAvailable ? 'available' : 'unavailable'}" style="font-size:0.95em; padding:6px 14px; margin-bottom:14px;">
-                        <i class="fas ${bookAvailable ? 'fa-check-circle' : 'fa-times-circle'}"></i>
-                        ${bookAvailable ? 'Available for Borrowing' : 'Currently Unavailable'}
-                    </div>
-
-                    <div class="book-meta">
-                        <div class="meta-item">
-                            <span class="meta-label">Publisher:</span>
-                            <span class="meta-value">${book.publisher}</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">ISBN:</span>
-                            <span class="meta-value">${book.isbn}</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Publication Year:</span>
-                            <span class="meta-value">${book.publicationYear}</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Genre:</span>
-                            <span class="meta-value">${book.genre}</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Pages:</span>
-                            <span class="meta-value">${book.pages}</span>
-                        </div>
-                    </div>
-
-                    <div class="action-buttons">
-                        <c:choose>
-                            <c:when test="${bookAvailable}">
-                                <form action="${pageContext.request.contextPath}/borrow" method="POST" style="display: inline;">
-                                    <input type="hidden" name="bookId" value="${book.id}">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-book-reader"></i> Borrow This Book
+                        <div class="action-buttons">
+                            <c:choose>
+                                <c:when test="${bookAvailable}">
+                                    <form action="${pageContext.request.contextPath}/borrow" method="POST" style="display: inline;">
+                                        <input type="hidden" name="bookId" value="${book.id}">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-book-reader"></i> Borrow This Book
+                                        </button>
+                                    </form>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn btn-primary" disabled>
+                                        <i class="fas fa-book-reader"></i> Currently Unavailable
                                     </button>
-                                </form>
-                            </c:when>
-                            <c:otherwise>
-                                <button class="btn btn-primary" disabled>
-                                    <i class="fas fa-book-reader"></i> Currently Unavailable
-                                </button>
-                            </c:otherwise>
-                        </c:choose>
-                        <button class="btn btn-secondary">
-                            <i class="fas fa-bookmark"></i> Add to Wishlist
-                        </button>
-                    </div>
-
-                    <c:if test="${not empty error}">
-                        <div class="error-message" style="margin-top: 20px; color: #E53E3E; padding: 10px 18px; background-color: #FED7D7; border-radius: 5px; font-size:0.98em; max-width:400px;">
-                            <i class="fas fa-exclamation-circle"></i> Sorry, something went wrong. Please try again or contact support if the problem persists.
+                                </c:otherwise>
+                            </c:choose>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-bookmark"></i> Add to Wishlist
+                            </button>
                         </div>
-                    </c:if>
+
+                        <c:if test="${not empty error}">
+                            <div class="error-message">
+                                <i class="fas fa-exclamation-circle"></i> Sorry, something went wrong. Please try again or contact support if the problem persists.
+                            </div>
+                        </c:if>
+                    </div>
                 </div>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
+    <footer>
+        <p>© 2025 Library Management System. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+</div>
 </body>
-</html> 
+</html>

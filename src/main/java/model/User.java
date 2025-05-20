@@ -12,6 +12,8 @@ public class User {
     private Date membershipDate;
     private String role;
     private String password;
+    private byte[] imageData;
+    private String imageType;
 
     // Constructors
     public User() {
@@ -124,5 +126,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public byte[] getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
     }
 }

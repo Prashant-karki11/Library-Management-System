@@ -40,6 +40,7 @@ public class DashboardServlet extends HttpServlet {
 
             // Get popular books
             List<Map<String, Object>> popularBooks = BookDAO.getPopularBooks(5);
+            if (popularBooks == null) popularBooks = new ArrayList<>();
             request.setAttribute("popularBooks", popularBooks);
 
         } catch (Exception e) {

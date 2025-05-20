@@ -32,7 +32,7 @@ public class RecentActivitiesServlet extends HttpServlet {
                     Map<String, Object> entry = new HashMap<>();
                     entry.put("bookTitle", book != null ? book.getTitle() : "Unknown");
                     entry.put("bookAuthor", book != null ? book.getAuthor() : "");
-                    entry.put("bookImage", book != null ? book.getImage() : "");
+                    entry.put("bookImageURL", book != null && book.getImageData() != null ? request.getContextPath() + "/book-image/" + book.getId() : "");
                     entry.put("borrowDate", borrow.getBorrowDate());
                     entry.put("dueDate", borrow.getDueDate());
                     entry.put("status", borrow.getStatus());

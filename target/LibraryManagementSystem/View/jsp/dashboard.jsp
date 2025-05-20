@@ -16,9 +16,8 @@
             --text-white: #FFFFFF;
             --text-gray: #666666;
             --card-bg: #FFFFFF;
-            --success-green: #48BB78;
-            --warning-yellow: #ECC94B;
-            --danger-red: #EF4444;
+            --returned-green: #48BB78;
+            --overdue-red: #EF4444;
         }
         * {
             margin: 0;
@@ -27,8 +26,10 @@
         }
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: var(--primary-bg);
-            color: #2D3748;
+            background: linear-gradient(135deg, #232946 0%, #6d83f2 100%);
+            color: #232946;
+            margin: 0;
+            overflow-x: hidden; /* Prevent horizontal overflow */
         }
         a {
             text-decoration: none;
@@ -40,194 +41,158 @@
         .container {
             display: flex;
             min-height: 100vh;
-        }
-        .sidebar {
-            width: 250px;
-            background: linear-gradient(to bottom, #6B46C1, #A78BFA);
-            padding: 20px;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-        }
-        .sidebar-header {
-            margin-bottom: 30px;
-        }
-        .logo {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #FFFFFF;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .logo span {
-            line-height: 1;
-        }
-        .sidebar ul {
-            list-style: none;
-        }
-        .sidebar a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px;
-            margin: 8px 0;
-            color: #FFFFFF;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .sidebar a i {
-            color: #FFFFFF;
-        }
-        .sidebar a:hover, .sidebar a.active {
-            background-color: #A78BFA;
-            color: #FFFFFF;
+            width: 100vw; /* Full viewport width */
+            flex-direction: column; /* Sidebar removed, so column layout */
         }
         .content {
-            flex-grow: 1;
-            padding: 30px;
-            margin-left: 250px;
-            color: #2D3748;
-        }
-        h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
+            padding: 40px 0 0 0;
+            min-height: 100vh;
+            width: 100%; /* Full width since sidebar is removed */
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-        }
-        .filter {
-            font-size: 0.7em;
-            background-color: #FFFFFF;
-            padding: 5px 10px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: #2D3748;
-        }
-        .stats {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        .stat-card {
-            background-color: #E6FFFA;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            flex: 1;
-            min-width: 150px;
-            color: #2D3748;
-        }
-        .stat-icon {
-            font-size: 2em;
-            color: var(--accent-blue);
-            margin-bottom: 10px;
-        }
-        .stat-card h3 {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            color: #2D3748;
-        }
-        .stat-card p {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #2D3748;
+            background: none;
         }
         .main-content {
             display: flex;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        .chart-section {
-            flex: 2;
-            background-color: #FFFFFF;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .chart-placeholder {
-            height: 200px;
-            display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            background-color: #F0F0F0;
-            border-radius: 5px;
-            color: #666666;
+            width: 100%;
+            margin-top: 0;
+            background: none;
         }
-        .borrowed-books {
-            flex: 1;
-            background-color: #FFFFFF;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .borrowed-books h3 {
-            margin-bottom: 20px;
-            color: #2D3748;
-        }
-        .count {
-            background-color: var(--accent-blue);
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.9em;
-            color: #FFFFFF;
-        }
-        .book-card {
+        .main-card {
+            background: #fff;
+            border-radius: 1.7rem;
+            box-shadow: 0 8px 32px 0 rgba(35, 41, 70, 0.13);
+            padding: 38px;
+            width: 100%;
+            max-width: 100%; /* Ensure it fits within viewport */
+            margin-bottom: 36px;
+            margin-top: 18px;
             display: flex;
-            gap: 15px;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 18px;
+            color: #232946;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 2em;
+            margin-bottom: 24px;
+            color: #e0e7ff;
+            font-weight: 800;
+            text-align: left;
+            width: 100%;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px;
+            width: 100%;
+            padding: 0 20px; /* Add padding to handle edge cases */
+            box-sizing: border-box;
+            margin-bottom: 32px;
+        }
+        .stat-card {
+            background: #fff;
+            border-radius: 1.3rem;
+            box-shadow: 0 6px 32px 0 rgba(35, 41, 70, 0.13);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.22s, box-shadow 0.22s;
+            width: 100%;
+            max-width: 100%; /* Ensure cards fit within container */
+        }
+        .stat-card:hover {
+            transform: translateY(-8px) scale(1.035);
+            box-shadow: 0 16px 40px 0 rgba(35, 41, 70, 0.18);
+        }
+        .stat-card h3 {
+            font-size: 1.18em;
+            margin-bottom: 10px;
+            color: #232946;
+            font-weight: 700;
+        }
+        .stat-card .value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #6B46C1;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 32px;
+            width: 100%;
+            padding: 0 20px; /* Add padding to handle edge cases */
+            box-sizing: border-box;
+            margin-bottom: 32px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 1.3rem;
+            box-shadow: 0 6px 32px 0 rgba(35, 41, 70, 0.13);
+            padding: 20px;
+            transition: transform 0.22s, box-shadow 0.22s;
+            width: 100%;
+            max-width: 100%; /* Ensure cards fit within container */
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.035);
+            box-shadow: 0 16px 40px 0 rgba(35, 41, 70, 0.18);
+        }
+        .card h2 {
+            font-size: 1.18em;
             margin-bottom: 20px;
-            padding: 10px;
-            background-color: #FFFFFF;
-            border-radius: 5px;
+            color: #232946;
+            font-weight: 700;
+            text-align: center;
         }
-        .book-card img {
-            width: 80px;
-            height: 120px;
-            border-radius: 5px;
-        }
-        .book-info h4 {
-            font-size: 1.1em;
-            margin-bottom: 5px;
-            color: #2D3748;
-        }
-        .book-info p {
-            font-size: 0.9em;
-            color: #666666;
-            margin-bottom: 5px;
-        }
-        .status-overdue {
-            background-color: var(--overdue-red);
-            color: white;
+        .status-badge {
             padding: 5px 10px;
             border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: 500;
             display: inline-block;
         }
-        .overdue-section {
-            background-color: #FFFFFF;
-            padding: 20px;
-            border-radius: 10px;
+        .status-overdue {
+            background-color: #EF4444;
+            color: #FFFFFF;
         }
-        .overdue-section h3 {
-            margin-bottom: 20px;
-            color: #2D3748;
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
         }
-        .see-all {
-            font-size: 0.9em;
-            color: var(--accent-blue);
-            transition: color 0.3s;
+        .action-button {
+            background: linear-gradient(90deg, #6d83f2 0%, #232946 100%);
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.08em;
+            font-weight: 700;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px #6B46C133;
+            width: 100%; /* Ensure buttons fit within container */
         }
-        .see-all:hover {
-            color: #A78BFA;
+        .action-button:hover {
+            background: linear-gradient(90deg, #232946 0%, #6d83f2 100%);
+            box-shadow: 0 4px 12px #6B46C166;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: #FFFFFF;
-            border-radius: 10px;
+            background: #fff;
+            border-radius: 1.3rem;
             overflow: hidden;
+            box-shadow: 0 6px 32px 0 rgba(35, 41, 70, 0.13);
         }
         th, td {
             padding: 12px;
@@ -235,178 +200,319 @@
             border-bottom: 1px solid #E5E7EB;
         }
         th {
-            background-color: #F0F0F0;
-            color: #2D3748;
+            background: #f4f6fb;
+            color: #232946;
             font-weight: 500;
         }
         td {
-            color: #2D3748;
+            color: #232946;
         }
         tr:hover {
-            background-color: #F9FAFB;
+            background: #f4f6fb;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.4);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 1.3rem;
+            min-width: 350px;
+            max-width: 90vw;
+            position: relative;
+            box-shadow: 0 8px 32px 0 rgba(35, 41, 70, 0.13);
+            width: 100%; /* Ensure modal fits within viewport */
+        }
+        .modal-content h2 {
+            font-size: 1.18em;
+            margin-bottom: 20px;
+            color: #232946;
+            font-weight: 700;
+            text-align: center;
+        }
+        .modal-content form input, .modal-content form select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 1.08em;
+            color: #232946;
+            margin-bottom: 15px;
+        }
+        .modal-content form label {
+            font-size: 1.08em;
+            color: #232946;
+            font-weight: 500;
+        }
+        .modal-content button {
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 1.08em;
+            font-weight: 700;
+            border: none;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .modal-content button[type="submit"] {
+            background: linear-gradient(90deg, #6d83f2 0%, #232946 100%);
+            color: #fff;
+            box-shadow: 0 2px 8px #6B46C133;
+        }
+        .modal-content button[type="submit"]:hover {
+            background: linear-gradient(90deg, #232946 0%, #6d83f2 100%);
+            box-shadow: 0 4px 12px #6B46C166;
+        }
+        .modal-content button[type="button"] {
+            background: none;
+            color: #232946;
+        }
+        .modal-content .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            color: #232946;
+        }
+        .message {
+            background: #48BB78;
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 100%; /* Ensure message fits within viewport */
+            text-align: center;
         }
         footer {
-            background-color: #FFFFFF;
-            padding: 20px;
+            background: #232946;
+            padding: 32px 0 18px 0;
             text-align: center;
-            border-top: 1px solid #E5E7EB;
+            width: 100%;
+            border-radius: 0 0 1.5rem 1.5rem;
+            box-shadow: 0 -2px 12px 0 rgba(109, 131, 242, 0.07);
+            color: #fff;
         }
         footer p {
-            margin-bottom: 10px;
-            color: #666666;
+            margin-bottom: 12px;
+            color: #fff;
+            font-size: 1.08em;
         }
         .social-icons {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 18px;
+            margin-top: 8px;
         }
         .social-icons a {
-            color: var(--accent-blue);
-            font-size: 1.5em;
+            color: #fff;
+            font-size: 1.6em;
             transition: color 0.3s;
         }
         .social-icons a:hover {
             color: #A78BFA;
         }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+        .navbar {
+            width: 100vw;
+            background: rgba(36, 32, 77, 0.98);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 48px;
+            height: 70px;
+            box-shadow: 0 2px 16px 0 rgba(35, 41, 70, 0.10);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .stat-card {
-            background: var(--card-bg);
-            padding: 20px;
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .navbar-logo {
+            height: 48px;
+            width: auto;
             border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .stat-card h3 {
-            color: var(--text-gray);
-            font-size: 0.9em;
-            margin-bottom: 10px;
-        }
-        .stat-card .value {
-            font-size: 2em;
-            font-weight: bold;
-            color: var(--accent-blue);
-        }
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-        }
-        .card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        .card h2 {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-            color: var(--text-gray);
-        }
-        .status-badge {
+            background: #fff;
             padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.8em;
+            box-shadow: 0 2px 8px #6B46C133;
+        }
+        .navbar-appname {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            margin-left: 32px;
+        }
+        .navbar-links a {
+            color: #e0e7ff;
+            font-size: 1.08em;
             font-weight: 500;
+            text-decoration: none;
+            padding: 8px 0;
+            border-bottom: 2.5px solid transparent;
+            transition: color 0.2s, border-bottom 0.2s;
         }
-        .status-overdue {
-            background-color: var(--danger-red);
-            color: white;
+        .navbar-links a.active, .navbar-links a:hover {
+            color: #fff;
+            border-bottom: 2.5px solid #6B46C1;
         }
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+        .navbar-user {
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
-        .action-button {
-            background: var(--accent-blue);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s;
+        .navbar-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 8px #6B46C133;
         }
-        .action-button:hover {
-            background: #A78BFA;
+        .navbar-userinfo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .navbar-username {
+            font-size: 1.08em;
+            font-weight: 600;
+            color: #fff;
+        }
+        .navbar-useremail {
+            font-size: 0.98em;
+            color: #e0e7ff;
+        }
+        .navbar-authbtns a {
+            margin-left: 12px;
+            padding: 8px 22px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.08em;
+            text-decoration: none;
+            border: none;
+            background: linear-gradient(90deg, #6d83f2 0%, #232946 100%);
+            color: #fff;
+            transition: background 0.2s, color 0.2s;
+            box-shadow: 0 2px 8px #6B46C133;
+        }
+        .navbar-authbtns a:hover {
+            background: linear-gradient(90deg, #232946 0%, #6d83f2 100%);
+            color: #fff;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <div class="logo"><span>📚 </span> Library.io</div>
-        </div>
-        <ul>
-            <li><a href="${pageContext.request.contextPath}/home"><i class="fas fa-home"></i> Home</a></li>
+<div class="navbar">
+    <div class="navbar-left">
+        <img src="${pageContext.request.contextPath}/assets/logo.jpg" alt="Library Logo" class="navbar-logo" />
+        <span class="navbar-appname">Library.io</span>
+        <nav class="navbar-links">
+            <a href="${pageContext.request.contextPath}/home">Home</a>
             <c:if test="${sessionScope.user != null && sessionScope.user.role == 'admin'}">
-                <li><a href="${pageContext.request.contextPath}/dashboard" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="${pageContext.request.contextPath}/library_loans"><i class="fas fa-book-open"></i> Library Loans</a></li>
-                <li><a href="${pageContext.request.contextPath}/books"><i class="fas fa-book"></i> Books</a></li>
-                <li><a href="${pageContext.request.contextPath}/members"><i class="fas fa-users"></i> Members</a></li>
+                <a href="${pageContext.request.contextPath}/dashboard" class="active">Dashboard</a>
+                <a href="${pageContext.request.contextPath}/library_loans">Library Loans</a>
+                <a href="${pageContext.request.contextPath}/books">Books</a>
+                <a href="${pageContext.request.contextPath}/members">Members</a>
             </c:if>
-            <li><a href="${pageContext.request.contextPath}/recent_activities"><i class="fas fa-clock"></i> My Profile</a></li>
-            <li><a href="${pageContext.request.contextPath}/about"><i class="fas fa-info-circle"></i> About Us</a></li>
-        </ul>
-    </aside>
-    <main class="content">
-        <h1 style="margin-bottom: 30px;">Dashboard</h1>
-        
-        <!-- Show add book/member messages -->
-        <c:if test="${not empty sessionScope.addBookMessage}">
-          <div id="addBookMsg" style="background:#48BB78;color:#fff;padding:15px 25px;border-radius:6px;margin-bottom:20px;font-size:1.1em;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-            ${sessionScope.addBookMessage}
-          </div>
-          <c:remove var="addBookMessage" scope="session"/>
+            <a href="${pageContext.request.contextPath}/recent_activities">My Profile</a>
+            <a href="${pageContext.request.contextPath}/about">About Us</a>
+        </nav>
+    </div>
+    <div class="navbar-user">
+        <c:choose>
+            <c:when test="${sessionScope.user != null && not empty sessionScope.user.imageData}">
+                <img src="${pageContext.request.contextPath}/user-image/${sessionScope.user.userID}" alt="Profile" class="navbar-avatar" />
+            </c:when>
+            <c:otherwise>
+                <img src="${pageContext.request.contextPath}/assets/default-avatar.jpg" alt="Default" class="navbar-avatar" />
+            </c:otherwise>
+        </c:choose>
+        <c:if test="${sessionScope.user != null}">
+            <div class="navbar-userinfo">
+                <span class="navbar-username">${sessionScope.user.name}</span>
+                <span class="navbar-useremail">${sessionScope.user.email}</span>
+            </div>
         </c:if>
-        <c:if test="${not empty sessionScope.addMemberMessage}">
-          <div id="addMemberMsg" style="background:#3182CE;color:#fff;padding:15px 25px;border-radius:6px;margin-bottom:20px;font-size:1.1em;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-            ${sessionScope.addMemberMessage}
-          </div>
-          <c:remove var="addMemberMessage" scope="session"/>
+        <c:if test="${sessionScope.user == null}">
+            <div class="navbar-authbtns">
+                <a href="${pageContext.request.contextPath}/View/jsp/login.jsp">Sign In</a>
+                <a href="${pageContext.request.contextPath}/View/jsp/register.jsp" style="background:#EF4444;">Register</a>
+            </div>
         </c:if>
+    </div>
+</div>
 
-        <!-- Statistics Cards -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>Total Books</h3>
-                <div class="value">${totalBooks}</div>
-            </div>
-            <div class="stat-card">
-                <h3>Active Loans</h3>
-                <div class="value">${activeLoans}</div>
-            </div>
-            <div class="stat-card">
-                <h3>Overdue Books</h3>
-                <div class="value">${overdueBooks}</div>
-            </div>
-            <div class="stat-card">
-                <h3>Total Members</h3>
-                <div class="value">${totalMembers}</div>
-            </div>
-        </div>
+<div class="container">
+    <div class="main-content">
+        <div class="main-card">
+            <h1>Dashboard</h1>
+            <!-- Show add book/member messages -->
+            <c:if test="${not empty sessionScope.addBookMessage}">
+                <div id="addBookMsg" class="message">${sessionScope.addBookMessage}</div>
+                <c:remove var="addBookMessage" scope="session"/>
+            </c:if>
+            <c:if test="${not empty sessionScope.addMemberMessage}">
+                <div id="addMemberMsg" class="message" style="background:#6B46C1;">${sessionScope.addMemberMessage}</div>
+                <c:remove var="addMemberMessage" scope="session"/>
+            </c:if>
 
-        <div class="dashboard-grid">
-            <!-- Left Column -->
-            <div>
-                <!-- Overdue Books -->
-                <div class="card">
-                    <h2>Overdue Books</h2>
-                    <table>
-                        <thead>
+            <!-- Statistics Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Books</h3>
+                    <div class="value">${totalBooks}</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Loans</h3>
+                    <div class="value">${activeLoans}</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Overdue Books</h3>
+                    <div class="value">${overdueBooks}</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Members</h3>
+                    <div class="value">${totalMembers}</div>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Left Column -->
+                <div>
+                    <!-- Overdue Books -->
+                    <div class="card">
+                        <h2>Overdue Books</h2>
+                        <table>
+                            <thead>
                             <tr>
                                 <th>Book Title</th>
                                 <th>Borrower</th>
                                 <th>Due Date</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody>
                             <c:forEach var="book" items="${overdueBooksList}">
                                 <tr>
                                     <td>${book.title}</td>
@@ -418,126 +524,130 @@
                                     </td>
                                 </tr>
                             </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
+                            </tbody>
+                        </table>
+                    </div>
 
-                <!-- Popular Books -->
-                <div class="card">
-                    <h2>Popular Books</h2>
-                    <canvas id="popularBooksChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Right Column -->
-            <div>
-                <!-- Quick Actions -->
-                <div class="card">
-                    <h2>Quick Actions</h2>
-                    <div class="quick-actions">
-                        <a href="${pageContext.request.contextPath}/books" class="action-button">
-                            <i class="fas fa-plus"></i> Add New Book
-                        </a>
-                        <a href="${pageContext.request.contextPath}/members" class="action-button">
-                            <i class="fas fa-user-plus"></i> Add New Member
-                        </a>
-                        <a href="${pageContext.request.contextPath}/library_loans" class="action-button">
-                            <i class="fas fa-book-reader"></i> View All Loans
-                        </a>
-                        <a href="${pageContext.request.contextPath}/recent_activities" class="action-button">
-                            <i class="fas fa-history"></i> View Activities
-                        </a>
+                    <!-- Popular Books -->
+                    <div class="card">
+                        <h2>Popular Books</h2>
+                        <canvas id="popularBooksChart"></canvas>
                     </div>
                 </div>
 
-                <!-- Recent Activities -->
-                <div class="card">
-                    <h2>Recent Activities</h2>
-                    <table>
-                        <tbody>
+                <!-- Right Column -->
+                <div>
+                    <!-- Quick Actions -->
+                    <div class="card">
+                        <h2>Quick Actions</h2>
+                        <div class="quick-actions">
+                            <a href="${pageContext.request.contextPath}/books" class="action-button">
+                                <i class="fas fa-plus"></i> Add New Book
+                            </a>
+                            <a href="${pageContext.request.contextPath}/members" class="action-button">
+                                <i class="fas fa-user-plus"></i> Add New Member
+                            </a>
+                            <a href="${pageContext.request.contextPath}/library_loans" class="action-button">
+                                <i class="fas fa-book-reader"></i> View All Loans
+                            </a>
+                            <a name="recent_activities" href="${pageContext.request.contextPath}/recent_activities" class="action-button">
+                                <i class="fas fa-history"></i> View Activities
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activities -->
+                    <div class="card">
+                        <h2>Recent Activities</h2>
+                        <table>
+                            <tbody>
                             <c:forEach var="activity" items="${recentActivities}">
                                 <tr>
                                     <td>
-                                        <i class="fas fa-circle" style="font-size: 0.5em; color: var(--accent-blue);"></i>
-                                        ${activity.description}
+                                        <i class="fas fa-circle" style="font-size: 0.5em; color: #6B46C1;"></i>
+                                            ${activity.description}
                                     </td>
                                 </tr>
                             </c:forEach>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </main>
-</div>
-
-<footer>
-    <p>© 2025 Library Management System. All rights reserved.</p>
-    <div class="social-icons">
-        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
-        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <footer>
+            <p>© 2025 Library Management System. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </footer>
     </div>
-</footer>
+</div>
 
 <!-- Modals for Add Book and Add Member -->
-<div id="addBookModal" class="modal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); align-items:center; justify-content:center;">
-  <div style="background:#fff; padding:30px; border-radius:10px; min-width:350px; max-width:90vw; position:relative;">
-    <h2 style="margin-bottom:20px;">Add New Book</h2>
-    <form method="post" action="${pageContext.request.contextPath}/add_book">
-      <div style="margin-bottom:15px;"><label>Title:<br><input type="text" name="title" required style="width:100%;padding:8px;"></label></div>
-      <div style="margin-bottom:15px;"><label>Author:<br><input type="text" name="author" required style="width:100%;padding:8px;"></label></div>
-      <div style="margin-bottom:15px;"><label>Publisher:<br><input type="text" name="publisher" style="width:100%;padding:8px;"></label></div>
-      <div style="margin-bottom:15px;"><label>ISBN:<br><input type="text" name="isbn" style="width:100%;padding:8px;"></label></div>
-      <div style="margin-bottom:15px;"><label>Publication Year:<br><input type="number" name="publicationYear" style="width:100%;padding:8px;"></label></div>
-      <div style="margin-bottom:15px;"><label>Genre:<br><input type="text" name="genre" style="width:100%;padding:8px;"></label></div>
-      <div style="margin-bottom:15px;"><label>Pages:<br><input type="number" name="pages" style="width:100%;padding:8px;"></label></div>
-      <div style="text-align:right;">
-        <button type="button" onclick="closeModal('addBookModal')" style="margin-right:10px;">Cancel</button>
-        <button type="submit" style="background:var(--accent-blue);color:#fff;padding:8px 18px;border:none;border-radius:5px;">Add Book</button>
-      </div>
-    </form>
-    <button onclick="closeModal('addBookModal')" style="position:absolute;top:10px;right:10px;background:none;border:none;font-size:1.5em;">&times;</button>
-  </div>
+<div id="addBookModal" class="modal">
+    <div class="modal-content">
+        <h2>Add New Book</h2>
+        <form method="post" action="${pageContext.request.contextPath}/add_book" enctype="multipart/form-data">
+            <div><label>Title:<br><input type="text" name="title" required></label></div>
+            <div><label>Author:<br><input type="text" name="author" required></label></div>
+            <div><label>Publisher:<br><input type="text" name="publisher"></label></div>
+            <div><label>ISBN:<br><input type="text" name="isbn"></label></div>
+            <div><label>Publication Year:<br><input type="number" name="publicationYear"></label></div>
+            <div><label>Genre:<br><input type="text" name="genre"></label></div>
+            <div><label>Pages:<br><input type="number" name="pages"></label></div>
+            <div><label>Book Cover Image:<br><input type="file" name="image" accept="image/*"></label></div>
+            <div style="text-align:right;">
+                <button type="button" onclick="closeModal('addBookModal')">Cancel</button>
+                <button type="submit">Add Book</button>
+            </div>
+        </form>
+        <button onclick="closeModal('addBookModal')" class="close-btn">×</button>
+    </div>
 </div>
 
-<div id="addMemberModal" class="modal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); align-items:center; justify-content:center;">
-  <div style="background:#fff; padding:30px; border-radius:10px; min-width:350px; max-width:90vw; position:relative;">
-    <h2 style="margin-bottom:20px;">Add New Member</h2>
-    <form method="post" action="${pageContext.request.contextPath}/add_member">
-      <div style="margin-bottom:15px;"><label>Name:<br><input type="text" name="name" required style="width:100%;padding:8px;"></label></div>
-      <div style="margin-bottom:15px;"><label>Email:<br><input type="email" name="email" required style="width:100%;padding:8px;"></label></div>
-      <div style="margin-bottom:15px;"><label>Password:<br><input type="password" name="password" required style="width:100%;padding:8px;"></label></div>
-      <div style="margin-bottom:15px;"><label>Role:<br><select name="role" style="width:100%;padding:8px;"><option value="user">User</option><option value="admin">Admin</option></select></label></div>
-      <div style="text-align:right;">
-        <button type="button" onclick="closeModal('addMemberModal')" style="margin-right:10px;">Cancel</button>
-        <button type="submit" style="background:var(--accent-blue);color:#fff;padding:8px 18px;border:none;border-radius:5px;">Add Member</button>
-      </div>
-    </form>
-    <button onclick="closeModal('addMemberModal')" style="position:absolute;top:10px;right:10px;background:none;border:none;font-size:1.5em;">&times;</button>
-  </div>
+<div id="addMemberModal" class="modal">
+    <div class="modal-content">
+        <h2>Add New Member</h2>
+        <form method="post" action="${pageContext.request.contextPath}/add_member" enctype="multipart/form-data">
+            <div><label>Name:<br><input type="text" name="name" required></label></div>
+            <div><label>Email:<br><input type="email" name="email" required></label></div>
+            <div><label>Password:<br><input type="password" name="password" required></label></div>
+            <div><label>Role:<br><select name="role"><option value="user">User</option><option value="admin">Admin</option></select></label></div>
+            <div><label>Profile Image:<br><input type="file" name="image" accept="image/*"></label></div>
+            <div style="text-align:right;">
+                <button type="button" onclick="closeModal('addMemberModal')">Cancel</button>
+                <button type="submit">Add Member</button>
+            </div>
+        </form>
+        <button onclick="closeModal('addMemberModal')" class="close-btn">×</button>
+    </div>
 </div>
 
 <script>
     // Popular Books Chart
     const ctx = document.getElementById('popularBooksChart').getContext('2d');
+    const labels = [
+        <c:forEach var="book" items="${popularBooks}">
+        '${book.title}',
+        </c:forEach>
+    ];
+    const data = [
+        <c:forEach var="book" items="${popularBooks}">
+        ${book.borrowCount},
+        </c:forEach>
+    ];
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: [
-                <c:forEach var="book" items="${popularBooks}">
-                    '${book.title}',
-                </c:forEach>
-            ],
+            labels: labels.length ? labels : ['No Data'],
             datasets: [{
                 label: 'Times Borrowed',
-                data: [
-                    <c:forEach var="book" items="${popularBooks}">
-                        ${book.borrowCount},
-                    </c:forEach>
-                ],
+                data: data.length ? data : [0],
                 backgroundColor: '#6B46C1',
                 borderRadius: 5
             }]
@@ -583,10 +693,10 @@
 
     // Auto-hide messages
     setTimeout(function() {
-      var msg1 = document.getElementById('addBookMsg');
-      if(msg1) msg1.style.display = 'none';
-      var msg2 = document.getElementById('addMemberMsg');
-      if(msg2) msg2.style.display = 'none';
+        var msg1 = document.getElementById('addBookMsg');
+        if(msg1) msg1.style.display = 'none';
+        var msg2 = document.getElementById('addMemberMsg');
+        if(msg2) msg2.style.display = 'none';
     }, 4000);
 </script>
 

@@ -9,9 +9,10 @@ public class Book {
     private int publicationYear;
     private String genre;
     private int pages;
-    private String image;
+    private byte[] imageData;
+    private String imageType;
 
-    public Book(int id, String title, String author, String publisher, String isbn, int publicationYear, String genre, int pages, String image) {
+    public Book(int id, String title, String author, String publisher, String isbn, int publicationYear, String genre, int pages, byte[] imageData, String imageType) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -20,7 +21,8 @@ public class Book {
         this.publicationYear = publicationYear;
         this.genre = genre;
         this.pages = pages;
-        this.image = image;
+        this.imageData = imageData;
+        this.imageType = imageType;
     }
 
     // Getters
@@ -32,7 +34,11 @@ public class Book {
     public int getPublicationYear() { return publicationYear; }
     public String getGenre() { return genre; }
     public int getPages() { return pages; }
+    public byte[] getImageData() { return imageData; }
+    public String getImageType() { return imageType; }
+
+    // Setters
     public void setPages(int pages) { this.pages = pages; }
-    public String getImage() { return image; }
-    public void setImage(String image) { this.image = image; }
+    public void setImageData(byte[] imageData) { this.imageData = imageData; }
+    public void setImageType(String imageType) { this.imageType = imageType; }
 }

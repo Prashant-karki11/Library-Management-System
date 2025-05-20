@@ -23,7 +23,8 @@ public class BookDAO {
                 rs.getInt("publicationYear"),
                 rs.getString("genre"),
                 rs.getInt("pages"),
-                rs.getString("image")
+                rs.getBytes("image_data"),
+                rs.getString("image_type")
             ));
         }
         return books;
@@ -46,7 +47,8 @@ public class BookDAO {
                 rs.getInt("publicationYear"),
                 rs.getString("genre"),
                 rs.getInt("pages"),
-                rs.getString("image")
+                rs.getBytes("image_data"),
+                rs.getString("image_type")
             );
         }
         return null;
@@ -77,7 +79,8 @@ public class BookDAO {
                 rs.getInt("publicationYear"),
                 rs.getString("genre"),
                 rs.getInt("pages"),
-                rs.getString("image")
+                rs.getBytes("image_data"),
+                rs.getString("image_type")
             ));
         }
         return books;
@@ -139,9 +142,9 @@ public class BookDAO {
         return popularBooks;
     }
 
-    public static void addBook(String title, String author, String publisher, String isbn, int publicationYear, String genre, int pages) throws Exception {
+    public static void addBook(String title, String author, String publisher, String isbn, int publicationYear, String genre, int pages, byte[] imageData, String imageType) throws Exception {
         Connection con = DBConnection.getConnection();
-        String sql = "INSERT INTO books (title, author, publisher, isbn, publicationYear, genre, pages) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO books (title, author, publisher, isbn, publicationYear, genre, pages, image_data, image_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = con.prepareStatement(sql);
         pstmt.setString(1, title);
         pstmt.setString(2, author);
@@ -150,6 +153,8 @@ public class BookDAO {
         pstmt.setInt(5, publicationYear);
         pstmt.setString(6, genre);
         pstmt.setInt(7, pages);
+        pstmt.setBytes(8, imageData);
+        pstmt.setString(9, imageType);
         pstmt.executeUpdate();
     }
 } 

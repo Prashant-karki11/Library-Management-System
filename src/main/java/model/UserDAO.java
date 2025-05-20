@@ -40,6 +40,8 @@ public class UserDAO {
                         rs.getString("password"),
                         rs.getString("role")
                     );
+                    user.setImageData(rs.getBytes("image_data"));
+                    user.setImageType(rs.getString("image_type"));
                     return user;
                 }
             }
@@ -93,7 +95,7 @@ public class UserDAO {
         return 0;
     }
 
-    public static void addUser(String name, String email, String password, String role) throws Exception {
+    public static void addUser(String name, String email, String password, String role, byte[] imageData, String imageType) throws Exception {
         Connection con = DBConnection.getConnection();
         String hashedPassword = password;
         try {
@@ -101,12 +103,52 @@ public class UserDAO {
             Class.forName("model.PasswordUtil");
             hashedPassword = model.PasswordUtil.hashPassword(password);
         } catch (Exception ignored) {}
-        String sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO users (name, email, password, role, image_data, image_type) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = con.prepareStatement(sql);
         pstmt.setString(1, name);
         pstmt.setString(2, email);
         pstmt.setString(3, hashedPassword);
         pstmt.setString(4, role);
+        pstmt.setBytes(5, imageData);
+        pstmt.setString(6, imageType);
+        pstmt.executeUpdate();
+    }
+
+    public static User getUserById(int id) throws Exception {
+        Connection con = DBConnection.getConnection();
+        String sql = "SELECT * FROM users WHERE id = ?";
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setInt(1, id);
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.next()) {
+            User user = new User(
+                rs.getInt("id"),
+                rs.getString("name"),
+                rs.getString("email"),
+                rs.getString("role")
+            );
+            user.setImageData(rs.getBytes("image_data"));
+            user.setImageType(rs.getString("image_type"));
+            return user;
+        }
+        return null;
+    }
+
+    public static void updateUserImage(int userId, byte[] imageData, String imageType) throws Exception {
+        Connection con = DBConnection.getConnection();
+        String sql = "UPDATE users SET image_data=?, image_type=? WHERE id=?";
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setBytes(1, imageData);
+        pstmt.setString(2, imageType);
+        pstmt.setInt(3, userId);
+        pstmt.executeUpdate();
+    }
+
+    public static void removeUserImage(int userId) throws Exception {
+        Connection con = DBConnection.getConnection();
+        String sql = "UPDATE users SET image_data=NULL, image_type=NULL WHERE id=?";
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setInt(1, userId);
         pstmt.executeUpdate();
     }
 } 

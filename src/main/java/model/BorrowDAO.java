@@ -138,21 +138,21 @@ public class BorrowDAO {
     public static List<Map<String, Object>> getAllBorrowsWithDetails() throws Exception {
         List<Map<String, Object>> borrows = new ArrayList<>();
         Connection con = DBConnection.getConnection();
-        String sql = "SELECT b.*, u.name, bk.title " +
+        String sql = "SELECT b.*, u.name, u.image_data, u.image_type, bk.title " +
                     "FROM borrows b " +
                     "JOIN users u ON b.user_id = u.id " +
                     "JOIN books bk ON b.book_id = bk.id " +
                     "ORDER BY b.borrow_date DESC";
-        
         PreparedStatement pstmt = con.prepareStatement(sql);
         ResultSet rs = pstmt.executeQuery();
-        
         while (rs.next()) {
             Map<String, Object> borrow = new HashMap<>();
             borrow.put("id", rs.getInt("id"));
             borrow.put("userId", rs.getInt("user_id"));
             borrow.put("bookId", rs.getInt("book_id"));
             borrow.put("username", rs.getString("name"));
+            borrow.put("userImageData", rs.getBytes("image_data"));
+            borrow.put("userImageType", rs.getString("image_type"));
             borrow.put("bookTitle", rs.getString("title"));
             borrow.put("borrowDate", rs.getDate("borrow_date"));
             borrow.put("dueDate", rs.getDate("due_date"));

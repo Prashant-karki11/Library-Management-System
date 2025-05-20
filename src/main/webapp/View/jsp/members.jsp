@@ -14,83 +14,157 @@
       --accent-blue: #6B46C1;
       --text-white: #FFFFFF;
       --text-gray: #666666;
-      --overdue-red: #EF4444;
-      --returned-green: #48BB78;
       --card-bg: #FFFFFF;
+      --returned-green: #48BB78;
+      --overdue-red: #EF4444;
     }
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    body {
+    html, body {
+      height: 100%;
       font-family: 'Roboto', sans-serif;
-      background-color: var(--primary-bg);
-      color: #2D3748;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    button {
-      cursor: pointer;
+      background: linear-gradient(135deg, #232946 0%, #6d83f2 100%);
+      color: #232946;
+      margin: 0;
+      overflow-x: hidden;
     }
     .container {
       display: flex;
+      flex-direction: column;
       min-height: 100vh;
+      width: 100vw;
     }
-    .sidebar {
-      width: 250px;
-      background: linear-gradient(to bottom, #6B46C1, #A78BFA);
-      padding: 20px;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-    }
-    .sidebar-header {
-      margin-bottom: 30px;
-    }
-    .logo {
-      font-size: 1.5em;
-      font-weight: bold;
-      color: #FFFFFF;
-    }
-    .sidebar ul {
-      list-style: none;
-    }
-    .sidebar a {
+    .navbar {
+      width: 100vw;
+      background: rgba(36, 32, 77, 0.98);
+      color: #fff;
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 12px;
-      margin: 8px 0;
-      color: #FFFFFF;
-      border-radius: 5px;
-      transition: background-color 0.3s, color 0.3s;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 70px;
+      box-shadow: 0 2px 16px 0 rgba(35, 41, 70, 0.10);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    .sidebar a i {
-      color: #FFFFFF;
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
-    .sidebar a:hover, .sidebar a.active {
-      background-color: #A78BFA;
-      color: #FFFFFF;
+    .navbar-logo {
+      height: 48px;
+      width: auto;
+      border-radius: 10px;
+      background: #fff;
+      padding: 4px 8px;
+      box-shadow: 0 2px 8px #6B46C133;
+    }
+    .navbar-appname {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+    .navbar-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-left: 32px;
+    }
+    .navbar-links a {
+      color: #e0e7ff;
+      font-size: 1.08em;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 2.5px solid transparent;
+      transition: color 0.2s, border-bottom 0.2s;
+    }
+    .navbar-links a.active, .navbar-links a:hover {
+      color: #fff;
+      border-bottom: 2.5px solid #6B46C1;
+    }
+    .navbar-user {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .navbar-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 8px #6B46C133;
+    }
+    .navbar-userinfo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .navbar-username {
+      font-size: 1.08em;
+      font-weight: 600;
+      color: #fff;
+    }
+    .navbar-useremail {
+      font-size: 0.98em;
+      color: #e0e7ff;
+    }
+    .navbar-authbtns a {
+      margin-left: 12px;
+      padding: 8px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.08em;
+      text-decoration: none;
+      border: none;
+      background: linear-gradient(90deg, #6d83f2 0%, #232946 100%);
+      color: #fff;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px #6B46C133;
+    }
+    .navbar-authbtns a:hover {
+      background: linear-gradient(90deg, #232946 0%, #6d83f2 100%);
+      color: #fff;
     }
     .content {
-      flex-grow: 1;
-      padding: 30px;
-      margin-left: 250px;
-      color: #2D3748;
+      flex: 1;
+      padding: 40px 0 0 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: none;
     }
-    h2 {
-      font-size: 2em;
-      margin-bottom: 20px;
-      color: #2D3748;
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin-top: 0;
+      background: none;
     }
     .members-section {
-      background-color: #FFFFFF;
-      padding: 20px;
-      border-radius: 10px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 32px 0 rgba(35, 41, 70, 0.13);
+      padding: 48px 56px;
+      max-width: 800px;
+      width: 90%;
+      margin: 20px 0;
+    }
+    h2 {
+      font-size: 2.2em;
+      color: #6B46C1;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-align: center;
     }
     table {
       width: 100%;
@@ -115,98 +189,147 @@
     tr:hover {
       background-color: #F9FAFB;
     }
+    .delete-button {
+      background: #EF4444;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-weight: 700;
+      font-size: 1em;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px #6B46C133;
+    }
+    .delete-button:hover {
+      background: #C53030;
+    }
     footer {
-      background-color: #FFFFFF;
-      padding: 20px;
+      background: #232946;
+      padding: 32px 0 18px 0;
       text-align: center;
-      border-top: 1px solid #E5E7EB;
+      width: 100%;
+      border-radius: 0 0 1.5rem 1.5rem;
+      box-shadow: 0 -2px 12px 0 rgba(109, 131, 242, 0.07);
+      color: #fff;
     }
     footer p {
-      margin-bottom: 10px;
-      color: #666666;
+      margin-bottom: 12px;
+      color: #fff;
+      font-size: 1.08em;
     }
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 18px;
+      margin-top: 8px;
     }
     .social-icons a {
-      color: var(--accent-blue);
-      font-size: 1.5em;
+      color: #fff;
+      font-size: 1.6em;
       transition: color 0.3s;
     }
     .social-icons a:hover {
       color: #A78BFA;
     }
+    @media (max-width: 900px) {
+      .members-section { padding: 32px 10px; }
+      .content { padding: 30px 5px; }
+      .navbar { padding: 0 20px; }
+      .navbar-links { gap: 15px; }
+      .navbar-authbtns a { padding: 6px 15px; }
+    }
   </style>
 </head>
 <body>
-
-<div class="container">
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <div class="logo">📚 Library.io</div>
-    </div>
-    <ul>
-      <li><a href="${pageContext.request.contextPath}/home"><i class="fas fa-home"></i> Home</a></li>
+<div class="navbar">
+  <div class="navbar-left">
+    <img src="${pageContext.request.contextPath}/assets/logo.jpg" alt="Library Logo" class="navbar-logo" />
+    <span class="navbar-appname">Library.io</span>
+    <nav class="navbar-links">
+      <a href="${pageContext.request.contextPath}/home">Home</a>
       <c:if test="${sessionScope.user != null && sessionScope.user.role == 'admin'}">
-        <li><a href="${pageContext.request.contextPath}/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-        <li><a href="${pageContext.request.contextPath}/library_loans"><i class="fas fa-book-open"></i> Library Loans</a></li>
-        <li><a href="${pageContext.request.contextPath}/books"><i class="fas fa-book"></i> Books</a></li>
-        <li><a href="${pageContext.request.contextPath}/members" class="active"><i class="fas fa-users"></i> Members</a></li>
+        <a href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
+        <a href="${pageContext.request.contextPath}/library_loans">Library Loans</a>
+        <a href="${pageContext.request.contextPath}/books">Books</a>
+        <a href="${pageContext.request.contextPath}/members" class="active">Members</a>
       </c:if>
-      <li><a href="${pageContext.request.contextPath}/recent_activities"><i class="fas fa-clock"></i> My Profile</a></li>
-      <li><a href="${pageContext.request.contextPath}/about"><i class="fas fa-info-circle"></i> About Us</a></li>
-    </ul>
-  </aside>
-  <main class="content">
-    <h2>Members</h2>
-    <div class="members-section">
-      <table>
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Role</th>
-          <c:if test="${sessionScope.user != null && sessionScope.user.role == 'admin'}">
-            <th>Action</th>
-          </c:if>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="member" items="${members}">
-          <tr>
-            <td>${member.userID}</td>
-            <td>${member.name}</td>
-            <td>${member.email}</td>
-            <td>${member.role}</td>
-            <c:if test="${sessionScope.user != null && sessionScope.user.role == 'admin' && sessionScope.user.userID != member.userID}">
-              <td>
-                <form action="${pageContext.request.contextPath}/members" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
-                  <input type="hidden" name="deleteUserId" value="${member.userID}" />
-                  <button type="submit" style="background:#EF4444;color:#fff;border:none;border-radius:4px;padding:6px 12px;cursor:pointer;">Delete</button>
-                </form>
-              </td>
-            </c:if>
-          </tr>
-        </c:forEach>
-        </tbody>
-      </table>
-    </div>
-  </main>
+      <a href="${pageContext.request.contextPath}/recent_activities">My Profile</a>
+      <a href="${pageContext.request.contextPath}/about">About Us</a>
+    </nav>
+  </div>
+  <div class="navbar-user">
+    <c:choose>
+      <c:when test="${sessionScope.user != null && not empty sessionScope.user.imageData}">
+        <img src="${pageContext.request.contextPath}/user-image/${sessionScope.user.userID}" alt="Profile" class="navbar-avatar" />
+      </c:when>
+      <c:otherwise>
+        <img src="${pageContext.request.contextPath}/assets/default-avatar.jpg" alt="Default" class="navbar-avatar" />
+      </c:otherwise>
+    </c:choose>
+    <c:if test="${sessionScope.user != null}">
+      <div class="navbar-userinfo">
+        <span class="navbar-username">${sessionScope.user.name}</span>
+        <span class="navbar-useremail">${sessionScope.user.email}</span>
+      </div>
+    </c:if>
+    <c:if test="${sessionScope.user == null}">
+      <div class="navbar-authbtns">
+        <a href="${pageContext.request.contextPath}/View/jsp/login.jsp">Sign In</a>
+        <a href="${pageContext.request.contextPath}/View/jsp/register.jsp" style="background:#EF4444;">Register</a>
+      </div>
+    </c:if>
+  </div>
 </div>
 
-<footer>
-  <p>© 2025 Library Management System. All rights reserved.</p>
-  <div class="social-icons">
-    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-    <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-    <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
-    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-  </div>
-</footer>
-
+<div class="container">
+  <main class="content">
+    <div class="main-content">
+      <div class="members-section">
+        <h2><i class="fas fa-users"></i> Members</h2>
+        <table>
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <c:if test="${sessionScope.user != null && sessionScope.user.role == 'admin'}">
+              <th>Action</th>
+            </c:if>
+          </tr>
+          </thead>
+          <tbody>
+          <c:forEach var="member" items="${members}">
+            <tr>
+              <td>${member.userID}</td>
+              <td>${member.name}</td>
+              <td>${member.email}</td>
+              <td>${member.role}</td>
+              <c:if test="${sessionScope.user != null && sessionScope.user.role == 'admin' && sessionScope.user.userID != member.userID}">
+                <td>
+                  <form action="${pageContext.request.contextPath}/members" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                    <input type="hidden" name="deleteUserId" value="${member.userID}" />
+                    <button type="submit" class="delete-button">Delete</button>
+                  </form>
+                </td>
+              </c:if>
+            </tr>
+          </c:forEach>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>© 2025 Library Management System. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+</div>
 </body>
 </html>
