@@ -29,7 +29,7 @@
             background: linear-gradient(135deg, #232946 0%, #6d83f2 100%);
             color: #232946;
             margin: 0;
-            overflow-x: hidden; /* Prevent horizontal overflow */
+            overflow-x: hidden;
         }
         a {
             text-decoration: none;
@@ -41,13 +41,13 @@
         .container {
             display: flex;
             min-height: 100vh;
-            width: 100vw; /* Full viewport width */
-            flex-direction: column; /* Sidebar removed, so column layout */
+            width: 100vw;
+            flex-direction: column;
         }
         .content {
             padding: 40px 0 0 0;
             min-height: 100vh;
-            width: 100%; /* Full width since sidebar is removed */
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -67,7 +67,7 @@
             box-shadow: 0 8px 32px 0 rgba(35, 41, 70, 0.13);
             padding: 38px;
             width: 100%;
-            max-width: 100%; /* Ensure it fits within viewport */
+            max-width: 100%;
             margin-bottom: 36px;
             margin-top: 18px;
             display: flex;
@@ -95,7 +95,7 @@
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 32px;
             width: 100%;
-            padding: 0 20px; /* Add padding to handle edge cases */
+            padding: 0 20px;
             box-sizing: border-box;
             margin-bottom: 32px;
         }
@@ -107,7 +107,7 @@
             text-align: center;
             transition: transform 0.22s, box-shadow 0.22s;
             width: 100%;
-            max-width: 100%; /* Ensure cards fit within container */
+            max-width: 100%;
         }
         .stat-card:hover {
             transform: translateY(-8px) scale(1.035);
@@ -126,10 +126,10 @@
         }
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 1fr 1fr; /* Adjusted to 50% each */
             gap: 32px;
             width: 100%;
-            padding: 0 20px; /* Add padding to handle edge cases */
+            padding: 0 20px;
             box-sizing: border-box;
             margin-bottom: 32px;
         }
@@ -140,7 +140,7 @@
             padding: 20px;
             transition: transform 0.22s, box-shadow 0.22s;
             width: 100%;
-            max-width: 100%; /* Ensure cards fit within container */
+            max-width: 100%;
         }
         .card:hover {
             transform: translateY(-8px) scale(1.035);
@@ -164,11 +164,30 @@
             background-color: #EF4444;
             color: #FFFFFF;
         }
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+        .quick-actions-container {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
             width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+            margin-bottom: 32px;
+        }
+        .quick-action-card {
+            background: #fff;
+            border-radius: 1.3rem;
+            box-shadow: 0 6px 32px 0 rgba(35, 41, 70, 0.13);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.22s, box-shadow 0.22s;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .quick-action-card:hover {
+            transform: translateY(-8px) scale(1.035);
+            box-shadow: 0 16px 40px 0 rgba(35, 41, 70, 0.18);
         }
         .action-button {
             background: linear-gradient(90deg, #6d83f2 0%, #232946 100%);
@@ -180,11 +199,42 @@
             font-weight: 700;
             transition: background 0.2s, box-shadow 0.2s;
             box-shadow: 0 2px 8px #6B46C133;
-            width: 100%; /* Ensure buttons fit within container */
+            width: 100%;
+            display: block;
         }
         .action-button:hover {
             background: linear-gradient(90deg, #232946 0%, #6d83f2 100%);
             box-shadow: 0 4px 12px #6B46C166;
+        }
+        .members-list {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 6px 32px 0 rgba(35, 41, 70, 0.13);
+            padding: 20px;
+            width: 100%;
+        }
+        .member-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .member-item:last-child {
+            border-bottom: none;
+        }
+        .member-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 8px #6B46C133;
+        }
+        .member-name {
+            font-size: 1.08em;
+            color: #2D3748;
+            font-weight: 500;
         }
         table {
             width: 100%;
@@ -230,7 +280,7 @@
             max-width: 90vw;
             position: relative;
             box-shadow: 0 8px 32px 0 rgba(35, 41, 70, 0.13);
-            width: 100%; /* Ensure modal fits within viewport */
+            width: 100%;
         }
         .modal-content h2 {
             font-size: 1.18em;
@@ -292,7 +342,7 @@
             font-size: 1.1em;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             width: 100%;
-            max-width: 100%; /* Ensure message fits within viewport */
+            max-width: 100%;
             text-align: center;
         }
         footer {
@@ -437,6 +487,7 @@
             </c:if>
             <a href="${pageContext.request.contextPath}/recent_activities">My Profile</a>
             <a href="${pageContext.request.contextPath}/about">About Us</a>
+            <a href="${pageContext.request.contextPath}/View/jsp/contact.jsp" >Contact Us</a>
         </nav>
     </div>
     <div class="navbar-user">
@@ -497,86 +548,61 @@
                 </div>
             </div>
 
-            <!-- Dashboard Grid -->
-            <div class="dashboard-grid">
-                <!-- Left Column -->
-                <div>
-                    <!-- Overdue Books -->
-                    <div class="card">
-                        <h2>Overdue Books</h2>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Book Title</th>
-                                <th>Borrower</th>
-                                <th>Due Date</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach var="book" items="${overdueBooksList}">
-                                <tr>
-                                    <td>${book.title}</td>
-                                    <td>${book.borrowerName}</td>
-                                    <td>
-                                        <span class="status-badge status-overdue">
-                                            <fmt:formatDate value="${book.dueDate}" pattern="MMM dd, yyyy" />
-                                        </span>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
+            <!-- Quick Actions Moved Here -->
+            <div class="quick-actions-container">
+                <div class="quick-action-card">
+                    <a href="${pageContext.request.contextPath}/books" class="action-button">
+                        <i class="fas fa-plus"></i> Add New Book
+                    </a>
+                </div>
+                <div class="quick-action-card">
+                    <a href="${pageContext.request.contextPath}/members" class="action-button">
+                        <i class="fas fa-user-plus"></i> Add New Member
+                    </a>
+                </div>
+                <div class="quick-action-card">
+                    <a href="${pageContext.request.contextPath}/library_loans" class="action-button">
+                        <i class="fas fa-book-reader"></i> View All Loans
+                    </a>
+                </div>
+                <div class="quick-action-card">
+                    <a name="recent_activities" href="${pageContext.request.contextPath}/recent_activities" class="action-button">
+                        <i class="fas fa-history"></i> View Activities
+                    </a>
+                </div>
+            </div>
 
-                    <!-- Popular Books -->
-                    <div class="card">
-                        <h2>Popular Books</h2>
-                        <canvas id="popularBooksChart"></canvas>
-                    </div>
+            <!-- Dashboard Grid with Popular Books and Members -->
+            <div class="dashboard-grid">
+                <!-- Left Column: Popular Books (50%) -->
+                <div class="card">
+                    <h2>Popular Books</h2>
+                    <canvas id="popularBooksChart"></canvas>
                 </div>
 
-                <!-- Right Column -->
-                <div>
-                    <!-- Quick Actions -->
-                    <div class="card">
-                        <h2>Quick Actions</h2>
-                        <div class="quick-actions">
-                            <a href="${pageContext.request.contextPath}/books" class="action-button">
-                                <i class="fas fa-plus"></i> Add New Book
-                            </a>
-                            <a href="${pageContext.request.contextPath}/members" class="action-button">
-                                <i class="fas fa-user-plus"></i> Add New Member
-                            </a>
-                            <a href="${pageContext.request.contextPath}/library_loans" class="action-button">
-                                <i class="fas fa-book-reader"></i> View All Loans
-                            </a>
-                            <a name="recent_activities" href="${pageContext.request.contextPath}/recent_activities" class="action-button">
-                                <i class="fas fa-history"></i> View Activities
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Recent Activities -->
-                    <div class="card">
-                        <h2>Recent Activities</h2>
-                        <table>
-                            <tbody>
-                            <c:forEach var="activity" items="${recentActivities}">
-                                <tr>
-                                    <td>
-                                        <i class="fas fa-circle" style="font-size: 0.5em; color: #6B46C1;"></i>
-                                            ${activity.description}
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
+                <!-- Right Column: Members List (50%) -->
+                <div class="card">
+                    <h2>Members</h2>
+                    <div class="members-list">
+                        <c:forEach var="member" items="${members}">
+                            <div class="member-item">
+                                <c:choose>
+                                    <c:when test="${not empty member.imageData}">
+                                        <img src="${pageContext.request.contextPath}/user-image/${member.userID}" alt="Profile" class="member-avatar" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="${pageContext.request.contextPath}/assets/default-avatar.jpg" alt="Default" class="member-avatar" />
+                                    </c:otherwise>
+                                </c:choose>
+                                <span class="member-name">${member.name}</span>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
         </div>
         <footer>
-            <p>© 2025 Library Management System. All rights reserved.</p>
+            <p>© 2025 Library IO. All rights reserved.</p>
             <div class="social-icons">
                 <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
                 <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>

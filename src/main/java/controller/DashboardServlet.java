@@ -13,7 +13,10 @@ import dao.ActivityDAO;
 @WebServlet("/dashboard")
 public class DashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        java.sql.Connection con = null;
         try {
+            con = DBConnection.getConnection();
+
             // Get total books count
             int totalBooks = BookDAO.getTotalBooks();
             request.setAttribute("totalBooks", totalBooks);
@@ -43,8 +46,31 @@ public class DashboardServlet extends HttpServlet {
             if (popularBooks == null) popularBooks = new ArrayList<>();
             request.setAttribute("popularBooks", popularBooks);
 
+            // Get all members
+            UserDAO userDAO = new UserDAO(con);
+            List<User> members = userDAO.getAllUsers();
+            System.out.println("Number of members fetched: " + members.size()); // Debug log
+            request.setAttribute("members", members);
+
         } catch (Exception e) {
             e.printStackTrace();
+            // Set default values in case of error
+            request.setAttribute("totalBooks", 0);
+            request.setAttribute("activeLoans", 0);
+            request.setAttribute("overdueBooks", 0);
+            request.setAttribute("totalMembers", 0);
+            request.setAttribute("recentActivities", new ArrayList<>());
+            request.setAttribute("overdueBooksList", new ArrayList<>());
+            request.setAttribute("popularBooks", new ArrayList<>());
+            request.setAttribute("members", new ArrayList<User>());
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
         request.getRequestDispatcher("/View/jsp/dashboard.jsp").forward(request, response);
     }

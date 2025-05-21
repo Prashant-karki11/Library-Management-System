@@ -227,13 +227,14 @@
     <nav class="navbar-links">
       <a href="${pageContext.request.contextPath}/home">Home</a>
       <c:if test="${sessionScope.user != null && sessionScope.user.role == 'admin'}">
-        <a href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
-        <a href="${pageContext.request.contextPath}/library_loans">Library Loans</a>
-        <a href="${pageContext.request.contextPath}/books">Books</a>
+        <a href="${pageContext.request.contextPath}/dashboard" style="margin-right: 16px;">Dashboard</a>
+        <a href="${pageContext.request.contextPath}/library_loans" style="margin-right: 16px;">Library Loans</a>
+        <a href="${pageContext.request.contextPath}/books" style="margin-right: 16px;">Books</a>
         <a href="${pageContext.request.contextPath}/members">Members</a>
       </c:if>
       <a href="${pageContext.request.contextPath}/recent_activities">My Profile</a>
       <a href="${pageContext.request.contextPath}/about" class="active">About Us</a>
+      <a href="${pageContext.request.contextPath}/View/jsp/contact.jsp" >Contact Us</a>
     </nav>
   </div>
   <div class="navbar-user">
@@ -291,7 +292,7 @@
     </div>
   </main>
   <footer>
-    <p>© 2025 Library Management System. All rights reserved.</p>
+    <p>© 2025 Library IO. All rights reserved.</p>
     <div class="social-icons">
       <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
       <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>

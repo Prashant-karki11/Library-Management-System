@@ -394,6 +394,7 @@
             </c:if>
             <a href="${pageContext.request.contextPath}/recent_activities">My Profile</a>
             <a href="${pageContext.request.contextPath}/about">About Us</a>
+            <a href="${pageContext.request.contextPath}/View/jsp/contact.jsp">Contact Us</a>
         </nav>
     </div>
     <div class="navbar-user">
@@ -471,7 +472,7 @@
         </c:choose>
     </section>
     <footer>
-        <p>© 2025 Library Management System. All rights reserved.</p>
+        <p>© 2025 Library IO. All rights reserved.</p>
         <div class="social-icons">
             <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
             <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>

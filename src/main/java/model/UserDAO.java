@@ -34,11 +34,11 @@ public class UserDAO {
                 String hashedPassword = rs.getString("password");
                 if (PasswordUtil.checkPassword(plainPassword, hashedPassword)) {
                     User user = new User(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("email"),
-                        rs.getString("password"),
-                        rs.getString("role")
+                            rs.getInt("id"),
+                            rs.getString("name"),
+                            rs.getString("email"),
+                            rs.getString("password"),
+                            rs.getString("role")
                     );
                     user.setImageData(rs.getBytes("image_data"));
                     user.setImageType(rs.getString("image_type"));
@@ -54,16 +54,18 @@ public class UserDAO {
     public java.util.List<User> getAllUsers() {
         java.util.List<User> users = new java.util.ArrayList<>();
         try {
-            String query = "SELECT id, name, email, role FROM users";
+            String query = "SELECT id, name, email, role, image_data, image_type FROM users";
             PreparedStatement pst = con.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 User user = new User(
-                    rs.getInt("id"),
-                    rs.getString("name"),
-                    rs.getString("email"),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("role")
                 );
+                user.setImageData(rs.getBytes("image_data"));
+                user.setImageType(rs.getString("image_type"));
                 users.add(user);
             }
         } catch (Exception e) {
@@ -114,6 +116,25 @@ public class UserDAO {
         pstmt.executeUpdate();
     }
 
+    // Add this method to check if an email already exists
+    public static boolean emailExists(String email) throws Exception {
+        Connection con = DBConnection.getConnection();
+        String sql = "SELECT COUNT(*) FROM users WHERE email = ?";
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setString(1, email);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } finally {
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
     public static User getUserById(int id) throws Exception {
         Connection con = DBConnection.getConnection();
         String sql = "SELECT * FROM users WHERE id = ?";
@@ -122,10 +143,10 @@ public class UserDAO {
         ResultSet rs = pstmt.executeQuery();
         if (rs.next()) {
             User user = new User(
-                rs.getInt("id"),
-                rs.getString("name"),
-                rs.getString("email"),
-                rs.getString("role")
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("email"),
+                    rs.getString("role")
             );
             user.setImageData(rs.getBytes("image_data"));
             user.setImageType(rs.getString("image_type"));
@@ -151,4 +172,4 @@ public class UserDAO {
         pstmt.setInt(1, userId);
         pstmt.executeUpdate();
     }
-} 
+}

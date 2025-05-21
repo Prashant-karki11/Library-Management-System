@@ -53,15 +53,24 @@
             margin-top: 0;
             background: none;
         }
-        table {
+        .main-card {
+            background: #fff;
+            border-radius: 1.7rem;
+            box-shadow: 0 8px 32px 0 rgba(35, 41, 70, 0.13);
+            padding: 38px;
             width: 90%;
             max-width: 1200px;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        table {
+            width: 100%;
             border-collapse: collapse;
             background-color: #FFFFFF;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 6px 32px 0 rgba(35, 41, 70, 0.13);
-            margin: 20px 0;
         }
         th, td {
             padding: 12px;
@@ -78,6 +87,12 @@
         }
         tr:hover {
             background-color: #F9FAFB;
+        }
+        h2 {
+            color: #6B46C1;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
         }
         footer {
             background: #232946;
@@ -220,6 +235,7 @@
             </c:if>
             <a href="${pageContext.request.contextPath}/recent_activities">My Profile</a>
             <a href="${pageContext.request.contextPath}/about">About Us</a>
+            <a href="${pageContext.request.contextPath}/View/jsp/contact.jsp">Contact Us</a>
         </nav>
     </div>
     <div class="navbar-user">
@@ -249,56 +265,58 @@
 <div class="container">
     <main class="content">
         <div class="main-content">
-            <h2 style="color: #fff; margin-bottom: 20px;">Books</h2>
-            <table>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Publisher</th>
-                    <th>ISBN</th>
-                    <th>Year</th>
-                    <th>Genre</th>
-                    <th>Pages</th>
-                    <th>Image</th>
-                    <c:if test="${sessionScope.user != null && sessionScope.user.role == 'admin'}">
-                        <th>Action</th>
-                    </c:if>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="book" items="${books}">
+            <div class="main-card">
+                <h2>Books</h2>
+                <table>
+                    <thead>
                     <tr>
-                        <td>${book.id}</td>
-                        <td>${book.title}</td>
-                        <td>${book.author}</td>
-                        <td>${book.publisher}</td>
-                        <td>${book.isbn}</td>
-                        <td>${book.publicationYear}</td>
-                        <td>${book.genre}</td>
-                        <td>${book.pages}</td>
-                        <td>
-                            <c:if test="${not empty book.imageData}">
-                                <img src="${pageContext.request.contextPath}/book-image/${book.id}" alt="Book Cover" style="width:40px;height:60px;object-fit:cover;border-radius:3px;">
-                            </c:if>
-                        </td>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Publisher</th>
+                        <th>ISBN</th>
+                        <th>Year</th>
+                        <th>Genre</th>
+                        <th>Pages</th>
+                        <th>Image</th>
                         <c:if test="${sessionScope.user != null && sessionScope.user.role == 'admin'}">
-                            <td>
-                                <form action="${pageContext.request.contextPath}/books" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this book?');">
-                                    <input type="hidden" name="deleteBookId" value="${book.id}" />
-                                    <button type="submit" style="background:#EF4444;color:#fff;border:none;border-radius:4px;padding:6px 12px;cursor:pointer;">Delete</button>
-                                </form>
-                            </td>
+                            <th>Action</th>
                         </c:if>
                     </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="book" items="${books}">
+                        <tr>
+                            <td>${book.id}</td>
+                            <td>${book.title}</td>
+                            <td>${book.author}</td>
+                            <td>${book.publisher}</td>
+                            <td>${book.isbn}</td>
+                            <td>${book.publicationYear}</td>
+                            <td>${book.genre}</td>
+                            <td>${book.pages}</td>
+                            <td>
+                                <c:if test="${not empty book.imageData}">
+                                    <img src="${pageContext.request.contextPath}/book-image/${book.id}" alt="Book Cover" style="width:40px;height:60px;object-fit:cover;border-radius:3px;">
+                                </c:if>
+                            </td>
+                            <c:if test="${sessionScope.user != null && sessionScope.user.role == 'admin'}">
+                                <td>
+                                    <form action="${pageContext.request.contextPath}/books" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this book?');">
+                                        <input type="hidden" name="deleteBookId" value="${book.id}" />
+                                        <button type="submit" style="background:#EF4444;color:#fff;border:none;border-radius:4px;padding:6px 12px;cursor:pointer;">Delete</button>
+                                    </form>
+                                </td>
+                            </c:if>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
     <footer>
-        <p>© 2025 Library Management System. All rights reserved.</p>
+        <p>© 2025 Library IO. All rights reserved.</p>
         <div class="social-icons">
             <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
             <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
